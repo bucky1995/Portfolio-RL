@@ -15,7 +15,7 @@ RUN apt-get update \
 && apt-get install -y ansible \
 && mkdir Portfolio-RL
 
-COPY . /data
-RUN make /data
+COPY . /agent
+RUN make /agent
 #ENTRYPOINT ["/bin/bash", "-c", "/start_only.sh"]
 CMD tail -f /dev/null

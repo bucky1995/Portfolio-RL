@@ -14,8 +14,5 @@ RUN apt-get update \
 && pip3 install --upgrade pip \
 && apt-get install -y ansible \
 && mkdir Portfolio-RL
-
-COPY . /data
-RUN make /data
 #ENTRYPOINT ["/bin/bash", "-c", "/start_only.sh"]
 CMD tail -f /dev/null
