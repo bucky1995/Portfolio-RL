@@ -1,0 +1,23 @@
+{
+	"data":{
+		"start_date":"2017-01-03",
+		"end_date":"2019-11-01",
+		"market_types":["stock"],
+		"ktype":"D"
+	},
+	"session":{
+		"start_date":"2017-01-03",
+		"end_date":"2019-11-01",
+		"market_types":"America",
+	    "codes":20,
+		"features":["close","high"],
+		"agents":["CNN","PG","10"],
+		"epochs":"100",
+		"noise_flag":"True",
+		"record_flag":"False",
+		"plot_flag":"False",
+		"reload_flag":"False",
+		"trainable":"True",
+		"method":"model_free"
+	}
+}

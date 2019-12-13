@@ -1,4 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+Created on Mon Jul 30 05:41:28 2018
+
+@author: Administrator
+"""
 import numpy as np
 import pandas as pd
 from math import log
@@ -14,33 +19,37 @@ def fill_zeros(x):
 
 class Environment:
     def __init__(self):
-        self.cost=0.0025
+        self.cost=0.001
 
-    def get_repo(self,start_date,end_date,codes_num):
+    def get_repo(self,start_date,end_date,codes_num,market):
         #preprocess parameters
 
         #read all data
-        self.data=pd.read_csv(r'./data/S&P500_transformed.csv' ,index_col=0,parse_dates=True,dtype=object)
+        self.data=pd.read_csv(r'./data/'+market+'.csv',index_col=0,parse_dates=True,dtype=object)
         self.data["code"]=self.data["code"].astype(str)
-
+        #if market=='China':
+            #self.data["code"]=self.data["code"].apply(fill_zeros)
+        
         sample_flag=True
         while sample_flag:
             codes=random.sample(set(self.data["code"]),codes_num)
             data2=self.data.loc[self.data["code"].isin(codes)]
 
+            # 生成有效时间
             date_set=set(data2.loc[data2['code']==codes[0]].index)
             for code in codes:
                 date_set=date_set.intersection((set(data2.loc[data2['code']==code].index)))
-            if len(date_set)>1200:
+            if len(date_set)>700:
                 sample_flag=False
-
+        
         date_set=date_set.intersection(set(pd.date_range(start_date,end_date)))
+ 
         self.date_set = list(date_set)
         self.date_set.sort()
 
         train_start_time = self.date_set[0]
-        train_end_time = self.date_set[int(len(self.date_set) / 6) * 5 - 1]
-        test_start_time = self.date_set[int(len(self.date_set) / 6) * 5]
+        train_end_time = self.date_set[int(len(self.date_set) / 4) * 3 - 1]
+        test_start_time = self.date_set[int(len(self.date_set) / 4) * 3]
         test_end_time = self.date_set[-1]
 
         return train_start_time,train_end_time,test_start_time,test_end_time,codes
@@ -48,10 +57,10 @@ class Environment:
     def get_data(self,start_time,end_time,features,window_length,market,codes):
         self.codes=codes
 
-        self.data = pd.read_csv(r'./data/' + market + '.csv', index_col=0, parse_dates=True, dtype=object)
+        self.data = pd.read_csv('E:\WPI\Reinforcement Learning\Final Project\Reinforcement-learning-in-portfolio-management--master\Reinforcement-learning-in-portfolio-management--master\data\America.csv', index_col=0, parse_dates=True, dtype=object)
         self.data["code"] = self.data["code"].astype(str)
-        if market == 'China':
-            self.data["code"] = self.data["code"].apply(fill_zeros)
+        #if market == 'China':
+            #self.data["code"] = self.data["code"].apply(fill_zeros)
 
         self.data[features]=self.data[features].astype(float)
         self.data=self.data[start_time.strftime("%Y-%m-%d"):end_time.strftime("%Y-%m-%d")]

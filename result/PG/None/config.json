@@ -1,1 +1,1 @@
-{"train_start_date": "2007-01-05", "train_end_date": "2016-07-06", "test_start_date": "2016-07-07", "test_end_date": "2018-04-27", "codes": ["000048", "600962", "600662", "000002", "000985"]}
+{"train_start_date": "2017-01-03", "train_end_date": "2019-02-15", "test_start_date": "2019-02-19", "test_end_date": "2019-11-01", "codes": ["HP", "HD", "AEE", "CPRI", "NLSN", "SWK", "KO", "CAT", "GILD", "CTL", "JEC", "TAP", "RMD", "INCY", "SPGI", "EIX", "OMC", "MU", "ICE", "ROP"]}
